@@ -1,89 +1,51 @@
 #include <stdio.h>
 #include <string.h>
+#define TF 100
 
 int main(){
+
+    int quantl, i, j, lenpalavra, maiorpalavra, k, c;
+    char vetpalavra[TF][50], palaux[50];
+    scanf("%d", &quantl);
+    while ((i = getchar()) != '\n' && i != EOF);
+    for(i=0;i<quantl;i++){
+        fgets(vetpalavra[i], sizeof(vetpalavra[i]), stdin);
+        lenpalavra = strlen(vetpalavra[i]);
+        if(i==0){
+            maiorpalavra = lenpalavra;
+        }
+        if(lenpalavra > maiorpalavra){
+            maiorpalavra = lenpalavra;
+        }
+        for(j=0;j<lenpalavra;){
+            if(vetpalavra[i][j] == ' ' && vetpalavra[i][j+1] == ' '){
+                for(k=j;k<lenpalavra;k++){
+                    vetpalavra[i][k] = vetpalavra[i][k+1];
+                }
+            }
+            else{
+                j++;
+            }
+        }
     
-    int n, i, j, l, k, maiorpalavra = 0, espacos, pos, spc, TL, TFL, termino;
-
-    scanf("%d", &n);
-
-    while (n > 0){
-        char palavra[n][51];
-        maiorpalavra = 0;
-        TFL = 0;
-        for (i=0; i<n; i++){
-			
-            fflush(stdin);
-            printf("digite a palavra\n");
-            gets(palavra[i]);
-            TFL++;
-        }
-
-        for (l = 0; l < TFL; l++){
-            TL = strlen(palavra[l]);
-
-            for(j = 0;j != 0;j++){
-                pos = 0;
-                spc = 0;
-                for (k = 0; k < TL; k++){
-                    
-                    if (palavra[l][k] == ' ')
-                        spc++;
-                    
-                    else
-                        spc = 0;
-
-                    if (spc == 2){
-                        pos = k;
-                        k = TL;
-                    }
-                }
-                
-                if (pos == 0){
-                    if (palavra[l][0] == ' ')
-                        for (i = 0; i < TL; i++)
-                            palavra[l][i] = palavra[l][i + 1];
-                    
-                }
-                
-                else{
-                    for (i = pos; i < TL; i++)
-                        palavra[l][i] = palavra[l][i + 1];
-                }
-            }
-        }
-
-        for (l = 0; l < TFL; l++) {
-            TL = strlen(palavra[l]);
-
-            if (palavra[l][TL - 1] == ' ')
-                palavra[l][TL - 1] = '\0';
-        }
-
-        maiorpalavra = 0;
-        for (l = 0; l < TFL; l++) {
-            TL = strlen(palavra[l]);
-            
-            if (TL > maiorpalavra) {
-                maiorpalavra = TL;
-            }
-        }
-        
-        for (i=0; i<n; i++){
-            
-            espacos = maiorpalavra - strlen(palavra[i]);
-
-            for(j=0; j<espacos; j++)
-                printf(" ");
-
-            printf("%s\n", palavra[i]);
-        }
-		if(i == n)
-        	scanf("%d", &n);
-
-        if(n > 0)
-            printf("\n");
     }
 
+    for(i=0;vetpalavra[0][i] == ' ';){
+        lenpalavra = strlen(vetpalavra[i]);
+        for (j = 0; vetpalavra[0][i] != '\0'; j++, i++) {
+    vetpalavra[0][j] = vetpalavra[0][i];
+}
+        strcpy(palaux, vetpalavra[i]);
+        memset(vetpalavra[i], '\0', sizeof(vetpalavra[i]));
+        for(c=0;c<maiorpalavra-strlen(palaux);c++){
+            vetpalavra[i][c] = ' ';
+    }
+    strcat(vetpalavra[i], palaux);
+    memset(palaux, '\0', sizeof(palaux));
+    }
+
+    for(i=0;i<quantl;i++){
+        printf("%s\n", vetpalavra[i]);
+            }
     return 0;
 }
