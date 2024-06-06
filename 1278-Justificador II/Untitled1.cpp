@@ -30,11 +30,7 @@ int main(){
     
     }
 
-    for(i=0;vetpalavra[0][i] == ' ';){
-        lenpalavra = strlen(vetpalavra[i]);
-        for (j = 0; vetpalavra[0][i] != '\0'; j++, i++) {
-    vetpalavra[0][j] = vetpalavra[0][i];
-}
+    for(i=0;i<maiorpalavra;i++){
         strcpy(palaux, vetpalavra[i]);
         memset(vetpalavra[i], '\0', sizeof(vetpalavra[i]));
         for(c=0;c<maiorpalavra-strlen(palaux);c++){
