@@ -44,5 +44,6 @@ for(i=TF-1, n=1;i>=0;i--)
     n *=2;
   }
   printf("%d\n", soma);
+  
   return 0;
 }
