@@ -48,7 +48,6 @@ int main() {
         strcat(vetpalavra[i], palaux);
         memset(palaux, '\0', sizeof(palaux));
     }
-
     for (i = 0; i < quantl; i++) {
         printf("%s\n", vetpalavra[i]);
     }

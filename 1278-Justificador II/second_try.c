@@ -1,50 +1,70 @@
-#include <stdio.h>
-#include <string.h>
-#define TF 100
-
-int main(){
-
-    int quantl, i, j, lenpalavra, maiorpalavra, k, c;
-    char vetpalavra[TF][50], palaux[50];
-    scanf("%d", &quantl);
-    while ((i = getchar()) != '\n' && i != EOF);
-    for(i=0;i<quantl;i++){
-        gets(vetpalavra[i]);
-        lenpalavra = strlen(vetpalavra[i]);
-        if(i==0){
-            maiorpalavra = lenpalavra;
-        }
-        if(lenpalavra > maiorpalavra){
-            maiorpalavra = lenpalavra;
-        }
-        for(j=0;j<lenpalavra;){
-            if(vetpalavra[i][j] == ' ' && vetpalavra[i][j+1] == ' '){
-                for(k=j;k<lenpalavra;k++){
-                    vetpalavra[i][k] = vetpalavra[i][k+1];
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int quantidade_linhas, i, c, quantidade_caracter, j, maior, multiplicador;
+    char string[100][50], restante[50];
+    scanf("%d", &quantidade_linhas);
+    while ((c = getchar()) != '\n' && c != EOF);
+    //Lê strings
+    while(quantidade_linhas>0){
+        for(i=0; i<quantidade_linhas;i++){
+            gets(string[i]);
+            if(i==0){
+                maior = strlen(string[i]);
+            }
+            else if(maior < strlen(string[i])){
+                    maior = strlen(string[i]);
                 }
+        }
+//******************************************
+        //Remove espaços do começo
+        for(c=0;c<quantidade_linhas;c++){
+                while(string[c][0] == ' '){
+                    for(i=0;i<strlen(string[c])-1;i++){
+                        string[c][i] = string[c][i+1];
+                        quantidade_caracter = strlen(string[c]);
+                    }
+                    string[c][quantidade_caracter-1] = '\0';
+                }
+        }
+//***********************************************
+        //Remove os espaços do meio
+        for(i=0;i<strlen(string[i]);i++){
+            for(c=0;c<strlen(string[i]);){
+                if(string[i][c] == ' ' && string[i][c+1] == ' '){
+                    for(j=c+1;j<strlen(string[i]);j++){
+                        string[i][j] = string[i][j+1];
+                        quantidade_caracter = strlen(string[i]);
+                    }
+                    string[i][quantidade_caracter] = '\0';
+                }
+                else
+                    c++;
+            }
+        }
+//******************************************
+        //Espaçamento necessário para o print
+        //Print
+        for(i=0;i<quantidade_linhas;i++){
+            if(strlen(string[i]) < maior){
+                restante[0] = '\0';
+                multiplicador = maior-strlen(string[i]);
+                for (j = 0; j < multiplicador; j++) {
+                    restante[j] = ' ';
+        }
+                strcat(restante, string[i]);
+                printf("%s\n", string[i]);
             }
             else{
-                j++;
+                printf("%s\n", string[i]);
             }
         }
-    
+//******************************************
+        //Sai lido
+        scanf("%d", &quantidade_linhas);
+        while ((c = getchar()) != '\n' && c != EOF);
+//****************************************************
     }
-
-    for(i=0;vetpalavra[0][i] == ' ';){
-        lenpalavra = strlen(vetpalavra[i]);
-        for (j = 0; vetpalavra[0][i] != '\0'; j++, i++) {
-    vetpalavra[0][j] = vetpalavra[0][i];
-}
-    for(i=0;i<maiorpalavra;i++){
-        strcpy(palaux, vetpalavra[i]);
-        for(c=0;c<maiorpalavra-strlen(palaux);c++){
-            vetpalavra[i][c] = ' ';
-    }
-    strcat(vetpalavra[i], palaux);
-    }
-    }
-    for(i=0;i<quantl;i++){
-        printf("%s\n", vetpalavra[i]);
-            }
     return 0;
 }
